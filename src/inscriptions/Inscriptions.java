@@ -12,9 +12,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * Point d'entrÃ©e dans l'application, un seul objet de type Inscription
- * permet de gÃ©rer les compÃ©titions, candidats (de type equipe ou personne)
- * ainsi que d'inscrire des candidats Ã  des compÃ©tition.
+ * Point d'entrée dans l'application, un seul objet de type Inscription
+ * permet de gérer les compétitions, candidats (de type equipe ou personne)
+ * ainsi que d'inscrire des candidats à  des compétition.
  */
 
 public class Inscriptions implements Serializable
@@ -31,7 +31,7 @@ public class Inscriptions implements Serializable
 	}
 	
 	/**
-	 * Retourne les compÃ©titions.
+	 * Retourne les compétitions.
 	 * @return
 	 */
 	
@@ -41,7 +41,7 @@ public class Inscriptions implements Serializable
 	}
 	
 	/**
-	 * Retourne tous les candidats (personnes et Ã©quipes confondues).
+	 * Retourne tous les candidats (personnes et équipes confondues).
 	 * @return
 	 */
 	
@@ -51,7 +51,7 @@ public class Inscriptions implements Serializable
 	}
 
 	/**
-	 * CrÃ©Ã©e une compÃ©tition. Ceci est le seul moyen, il n'y a pas
+	 * Crée une compétition. Ceci est le seul moyen, il n'y a pas
 	 * de constructeur public dans {@link Competition}.
 	 * @param nom
 	 * @param dateCloture
@@ -68,7 +68,7 @@ public class Inscriptions implements Serializable
 	}
 
 	/**
-	 * CrÃ©Ã©e une Candidat de type Personne. Ceci est le seul moyen, il n'y a pas
+	 * Crée un Candidat de type Personne. Ceci est le seul moyen, il n'y a pas
 	 * de constructeur public dans {@link Personne}.
 
 	 * @param nom
@@ -85,7 +85,7 @@ public class Inscriptions implements Serializable
 	}
 	
 	/**
-	 * CrÃ©Ã©e une Candidat de type Ã©quipe. Ceci est le seul moyen, il n'y a pas
+	 * Crée un Candidat de type équipe. Ceci est le seul moyen, il n'y a pas
 	 * de constructeur public dans {@link Equipe}.
 	 * @param nom
 	 * @param prenom
@@ -100,10 +100,20 @@ public class Inscriptions implements Serializable
 		return equipe;
 	}
 	
+	/**
+	 * supprime une compétition de la liste des compétitions
+	 * @param competition
+	 */
+	
 	void remove(Competition competition)
 	{
 		competitions.remove(competition);
 	}
+	
+	/**
+	 * supprime un candidat de la liste des candidats qu'il soit Personne ou Equipe
+	 * @param candidat
+	 */
 	
 	void remove(Candidat candidat)
 	{
@@ -112,7 +122,7 @@ public class Inscriptions implements Serializable
 	
 	/**
 	 * Retourne l'unique instance de cette classe.
-	 * CrÃ©e cet objet s'il n'existe dÃ©jÃ .
+	 * Crée cet objet s'il n'existe déjà .
 	 * @return l'unique objet de type {@link Inscriptions}.
 	 */
 	
@@ -155,7 +165,7 @@ public class Inscriptions implements Serializable
 	
 	/**
 	 * Sauvegarde le gestionnaire pour qu'il soit ouvert automatiquement 
-	 * lors d'une exÃ©cution ultÃ©rieure du programme.
+	 * lors d'une exécution ultérieure du programme.
 	 * @throws IOException 
 	 */
 	
@@ -193,7 +203,7 @@ public class Inscriptions implements Serializable
 	public static void main(String[] args)
 	{
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de flÃ©chettes", null, false);
+		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
 		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
 				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
 		flechettes.add(tony);

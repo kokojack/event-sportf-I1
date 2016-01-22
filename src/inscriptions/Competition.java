@@ -72,6 +72,12 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.dateCloture = dateCloture;
 	}
 	
+	public boolean ouvert()
+	{
+		//TODO Implémenter la méthode ouvert
+		//comparer la date de clôture et la date système 
+		return true;
+	}
 	/**
 	 * Retourne l'ensemble des candidats inscrits.
 	 * @return
@@ -91,7 +97,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean add(Personne personne)
 	{
-		// TODO vÃ©rifier que la date de clÃ´ture n'est pas passÃ©e
+		// TODO vérifier que la date de clôture n'est pas passée
 		if (enEquipe)
 			throw new RuntimeException();
 		personne.add(this);
