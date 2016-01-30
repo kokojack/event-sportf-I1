@@ -1,8 +1,8 @@
 package inscriptions;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -18,10 +18,10 @@ public class Competition implements Comparable<Competition>, Serializable
 	private Inscriptions inscriptions;
 	private String nom;
 	private Set<Candidat> candidats;
-	private Date dateCloture;
+	private LocalDate dateCloture;
 	private boolean enEquipe = false;
 
-	Competition(Inscriptions inscriptions, String nom, Date dateCloture, boolean enEquipe)
+	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
 	{
 		this.enEquipe = enEquipe;
 		this.inscriptions = inscriptions;
@@ -45,7 +45,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return
 	 */
 	
-	public Date getDateCloture()
+	public LocalDate getDateCloture()
 	{
 		return dateCloture;
 	}
@@ -66,7 +66,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @param dateCloture
 	 */
 	
-	public void setDateCloture(Date dateCloture)
+	public void setDateCloture(LocalDate dateCloture)
 	{
 		// TODO vérifier que l'on avance pas la date.
 		this.dateCloture = dateCloture;
