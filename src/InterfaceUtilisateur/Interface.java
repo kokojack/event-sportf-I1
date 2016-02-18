@@ -497,7 +497,7 @@ public class Interface {
 
 		};
 	}
-
+	//TODO
 	static Menu getMenuCompetition() {
 		Menu competition = new Menu("COMPETITIONS", "CO");
 		competition.ajoute(getOptionAfficherCompetition());
