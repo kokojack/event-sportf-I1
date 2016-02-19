@@ -739,7 +739,7 @@ public class Interface {
 	// }
 
 	static Option getOptionAfficherInscription() {
-		Option afficherInscription = new Option("Afficher toutes inscriptions",
+		Option afficherInscription = new Option("Afficher les inscriptions",
 				"AI", getActionAfficherInscriptions());
 		return afficherInscription;
 	}
@@ -780,13 +780,13 @@ public class Interface {
 	}
 
 	public static String NomEquipes(Personne c) {
-		String msg = " ";
+		String msg = "";
 		for (Equipe e : c.getEquipes())
 			msg = msg + e.getNom() + "; ";
 		return msg;
 	}
 
-	public static String NomMembres(Candidat e) {
+	public static String NomMembres(Equipe e) {
 		String ch = " ";
 		for (Personne p : ((Equipe) e).getMembres())
 			ch = ch + p.getNom() + p.getPrenom() + p.getMail();
