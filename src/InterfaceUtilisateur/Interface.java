@@ -13,37 +13,26 @@ public class Interface {
 
 	static final Inscriptions inscript = Inscriptions.getInscriptions();
 
+	/**
+	 * constitue la page d'acceuil de l'application en regroupant les 3
+	 * principaux menus -candidat, competitions et inscription
+	 */
 	static Menu getMenuPrincipal() {
 		Menu menuPrincipal = new Menu("Menu Principal");
 		// menuPrincipal.ajoute(getMenuInscription());
 		menuPrincipal.ajoute(getOptionAfficherInscription());
 		menuPrincipal.ajoute(getMenuCandidat());
 		menuPrincipal.ajoute(getMenuCompetition());
-		menuPrincipal.ajoute(getOptionQuitter());
+		menuPrincipal.ajouteQuitter("Q");
 		return menuPrincipal;
-	}
-
-	static Option getOptionQuitter() {
-		Option quitter = new Option("QUITTER", "Q", getActionQuitter());
-		return quitter;
-	}
-
-	static Action getActionQuitter() {
-		return new Action() {
-
-			@Override
-			public void optionSelectionnee() {
-				System.out.println("\tVous êtes déconnectés!! Aurevoir!\n");
-			}
-
-		};
 	}
 
 	static Menu getMenuCandidat() {
 		Menu candidat = new Menu("CANDIDATS", "CA");
 		candidat.ajoute(getMenuPersonne());
 		candidat.ajoute(getMenuEquipe());
-		candidat.ajoute(getOptionPrecedent());
+		candidat.ajouteRevenir("P");
+		candidat.ajouteQuitter("Q");
 		return candidat;
 	}
 
@@ -53,8 +42,8 @@ public class Interface {
 		personne.ajoute(getMenuModifierPersonne());
 		personne.ajoute(getOptionCreerPersonne());
 		personne.ajoute(getOptionSupprimerPersonne());
-		personne.ajoute(getOptionRetour(personne));
-		personne.ajoute(getOptionPrecedent());
+		personne.ajouteRevenir("P");
+		personne.ajouteQuitter("Q");
 		return personne;
 	}
 
@@ -64,54 +53,9 @@ public class Interface {
 		equipe.ajoute(getMenuModifierPersonneEquipe());
 		equipe.ajoute(getOptionCreerEquipe());
 		equipe.ajoute(getOptionSupprimerEquipe());
-		equipe.ajoute(getOptionRetour(equipe));
-		equipe.ajoute(getOptionPrecedent());
+		equipe.ajouteRevenir("P");;
+		equipe.ajouteQuitter("Q");;
 		return equipe;
-	}
-
-	static Option getOptionPrecedent() {
-		Option retour = new Option("Menu Principal", "ACC", getActionAcceuil());
-		return retour;
-	}
-
-	static Action getActionAcceuil() {
-		return new Action() {
-
-			@Override
-			public void optionSelectionnee() {
-				getMenuPrincipal().start();
-			}
-
-		};
-	}
-
-	static Option getOptionRetour(Menu m) {
-		Option retourner = new Option("Precedent", "P", getActionPrecedent(m));
-		return retourner;
-	}
-
-	static Action getActionPrecedent(Menu m) {
-		return new Action() {
-
-			@Override
-			public void optionSelectionnee() {
-				if (m.getTitre() == "Les Personnes"
-						|| m.getTitre() == "Les Equipes")
-					getMenuCandidat().start();
-				else if (m.getTitre() == "Modifier Une Personne"
-						|| m.getTitre() == "Modifier un membre")
-					getMenuPersonne().start();
-				else if (m.getTitre() == "Modifier l'équipe"
-						|| m.getTitre() == "Modifier les membres d'une equipe")
-					getMenuEquipe().start();
-				else if (m.getTitre() == "Inscrire un candidat")
-					getMenuCompetition().start();
-				else if (m.getTitre() == "Inscrire une personne"
-						|| m.getTitre() == "Inscrire une equipe")
-					getMenuInscrireCandidat().start();
-
-			}
-		};
 	}
 
 	static Option getOptionAfficherPersonne() {
@@ -211,8 +155,8 @@ public class Interface {
 	static Menu getMenuModifierPersonne() {
 		Menu modifierPersonne = new Menu("Modifier Une Personne", "MP");
 		modifierPersonne.ajoute(getOptionListerPersonne());
-		modifierPersonne.ajoute(getOptionRetour(modifierPersonne));
-		modifierPersonne.ajoute(getOptionPrecedent());
+		modifierPersonne.ajouteRevenir("P");
+		modifierPersonne.ajouteQuitter("Q");
 		// modifierEquipe.ajoute(getOptionSupprimerPersonneAequipe());
 		return modifierPersonne;
 	}
@@ -261,8 +205,8 @@ public class Interface {
 		modifierMembre.ajoute(getOptionModifierNom(membre));
 		modifierMembre.ajoute(getOptionModifierPrenom(membre));
 		modifierMembre.ajoute(getOptionModifierMail(membre));
-		modifierMembre.ajoute(getOptionRetour(modifierMembre));
-		modifierMembre.ajoute(getOptionPrecedent());
+		modifierMembre.ajouteRevenir("P");
+		modifierMembre.ajouteQuitter("Q");
 		return modifierMembre;
 	}
 
@@ -329,9 +273,8 @@ public class Interface {
 	static Menu getMenuModifierPersonneEquipe() {
 		Menu modifierEquipe = new Menu("Modifier l'équipe", "ME");
 		modifierEquipe.ajoute(getOptionListerEquipe());
-		modifierEquipe.ajoute(getOptionRetour(modifierEquipe));
-		modifierEquipe.ajoute(getOptionPrecedent());
-		// modifierEquipe.ajoute(getOptionSupprimerPersonneAequipe());
+		modifierEquipe.ajouteRevenir("P");
+		modifierEquipe.ajouteQuitter("Q");
 		return modifierEquipe;
 	}
 
@@ -354,7 +297,8 @@ public class Interface {
 					System.out.println("\tAucune Equipe enregistrée!!\n");
 					getMenuEquipe().start();
 				}
-				System.out.println("\tChoisir l'équipe en saisissant son numéro\n");
+				System.out
+						.println("\tChoisir l'équipe en saisissant son numéro\n");
 				return equipe;
 			}
 
@@ -372,8 +316,8 @@ public class Interface {
 		Menu modifierEquipe = new Menu("Modifier les membres d'une equipe");
 		modifierEquipe.ajoute(getOptionEnleverPersonne(equipe));
 		modifierEquipe.ajoute(getOptionAjouterPersonne(equipe));
-		modifierEquipe.ajoute(getOptionRetour(modifierEquipe));
-		modifierEquipe.ajoute(getOptionPrecedent());
+		modifierEquipe.ajouteRevenir("P");
+		modifierEquipe.ajouteQuitter("Q");
 		return modifierEquipe;
 	}
 
@@ -420,7 +364,7 @@ public class Interface {
 				for (Candidat candidat : inscript.getCandidats())
 					if (candidat instanceof Personne)
 						personnes.add((Personne) candidat);
-				if (personnes.isEmpty()){
+				if (personnes.isEmpty()) {
 					System.out.println("\tAucun membre enregistré!!\n");
 					getMenuModifierPersonneEquipe().start();
 				}
@@ -488,8 +432,8 @@ public class Interface {
 
 			@Override
 			public void elementSelectionne(int indice, Equipe element) {
-				System.out.println("\tVous avez sélectionné l'élément" + element
-						+ "à l'indice " + indice+"\n");
+				System.out.println("\tVous avez sélectionné l'élément"
+						+ element + "à l'indice " + indice + "\n");
 				element.delete();
 				System.out.println(element + " a bien été supprimée!\n");
 
@@ -497,14 +441,16 @@ public class Interface {
 
 		};
 	}
-	//TODO
+
+	// TODO
 	static Menu getMenuCompetition() {
 		Menu competition = new Menu("COMPETITIONS", "CO");
 		competition.ajoute(getOptionAfficherCompetition());
 		competition.ajoute(getOptionCreerCompetition());
 		competition.ajoute(getOptionSupprimerCompetition());
 		competition.ajoute(getMenuInscrireCandidat());
-		competition.ajoute(getOptionPrecedent());
+		competition.ajouteRevenir("P");
+		competition.ajouteQuitter("Q");
 		return competition;
 	}
 
@@ -519,23 +465,22 @@ public class Interface {
 
 			@Override
 			public void optionSelectionnee() {
-				String ch; String stat; int count = 1;
+				String ch;
+				String stat;
+				int count = 1;
 				for (inscriptions.Competition c : inscript.getCompetitions()) {
 					if (c.ouvert())
-						 ch = "ouvertes";
+						ch = "ouvertes";
 					else
 						ch = "fermées";
 					if (c.estEnEquipe())
 						stat = "équipe";
 					stat = "individuel";
-					System.out.println("\t"+count+"-La compétiton\t"
-							+ c.toString()
-							+ "\n\t\tles inscriptions sont\t"
-							+ ch + 
-							"\n\t\t\t\tjusqu'à la date:\t"
+					System.out.println("\t" + count + "-La compétiton\t"
+							+ c.toString() + "\n\t\tles inscriptions sont\t"
+							+ ch + "\n\t\t\t\tjusqu'à la date:\t"
 							+ c.getDateCloture()
-							+ "\n\t\telles se déroulent en\t"
-							+ stat + "\n\n");
+							+ "\n\t\telles se déroulent en\t" + stat + "\n\n");
 					count++;
 				}
 			}
@@ -576,7 +521,7 @@ public class Interface {
 				List<Competition> compet = new ArrayList<Competition>();
 				for (Competition competition : inscript.getCompetitions())
 					compet.add(competition);
-				if (compet.isEmpty()){
+				if (compet.isEmpty()) {
 					System.out.println("\tAucune Compétition Enregistrée!!\n");
 					getMenuCompetition().start();
 				}
@@ -586,8 +531,8 @@ public class Interface {
 			@Override
 			public void elementSelectionne(int indice, Competition element) {
 				indice++;
-				System.out.println("\tVous avez sélectionnez la compétition " + element
-						+ "à l'indice " + indice+"\n");
+				System.out.println("\tVous avez sélectionnez la compétition "
+						+ element + "à l'indice " + indice + "\n");
 				element.delete();
 				System.out.println("\tL'élément a été supprimé\n");
 
@@ -599,8 +544,8 @@ public class Interface {
 	static Menu getMenuInscrireCandidat() {
 		Menu inscription = new Menu("Inscrire un candidat", "IC");
 		inscription.ajoute(getOptionListerCompetitions());
-		inscription.ajoute(getOptionRetour(inscription));
-		inscription.ajoute(getOptionPrecedent());
+		inscription.ajouteRevenir("P");
+		inscription.ajouteQuitter("Q");
 		return inscription;
 	}
 
@@ -630,8 +575,9 @@ public class Interface {
 							.println("\tListe des inscripts à la compétition "
 									+ element.getNom() + "\n");
 				int count = 1;
-				for (Candidat c : element.getCandidats()){
-					System.out.println("\t\t"+count+"- "+c.getNom()+"\n");
+				for (Candidat c : element.getCandidats()) {
+					System.out.println("\t\t" + count + "- " + c.getNom()
+							+ "\n");
 					count++;
 				}
 				if (element.estEnEquipe()) {
@@ -650,8 +596,8 @@ public class Interface {
 	static Menu MenuInscrirePersonne(Competition c) {
 		Menu inscrireP = new Menu("Inscrire une personne", "IP");
 		inscrireP.ajoute(getOptionListePersonne(c));
-		inscrireP.ajoute(getOptionRetour(inscrireP));
-		inscrireP.ajoute(getOptionPrecedent());
+		inscrireP.ajouteRevenir("P");
+		inscrireP.ajouteQuitter("Q");
 		return inscrireP;
 	}
 
@@ -681,7 +627,7 @@ public class Interface {
 				if (comp.add(element)) {
 					System.out.println("\tLe membre " + element.getNom()
 							+ " est maintenant inscrit à la compétition "
-							+ comp.getNom()+ "\n");
+							+ comp.getNom() + "\n");
 					getMenuCompetition().start();
 				}
 
@@ -693,8 +639,8 @@ public class Interface {
 	static Menu MenuInscrireEquipe(Competition c) {
 		Menu inscrireE = new Menu("Inscrire une équipe", "IE");
 		inscrireE.ajoute(getOptionListeEquipe(c));
-		inscrireE.ajoute(getOptionRetour(inscrireE));
-		inscrireE.ajoute(getOptionPrecedent());
+		inscrireE.ajouteRevenir("P");
+		inscrireE.ajouteQuitter("Q");
 		return inscrireE;
 	}
 
@@ -724,7 +670,7 @@ public class Interface {
 				if (comp.add(element)) {
 					System.out.println("\tL'équipe " + element.getNom()
 							+ " est maintenant inscrite à la compétition "
-							+ comp.getNom()+"\n");
+							+ comp.getNom() + "\n");
 
 				}
 			}
