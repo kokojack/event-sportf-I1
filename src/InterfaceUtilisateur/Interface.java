@@ -147,6 +147,7 @@ public class Interface {
 			public void optionSelectionnee() {
 				String nom = utilitaires.EntreesSorties
 						.getString("entrer le nom");
+				//LocalDate date = LocalDate.parse(utilitaires.EntreesSorties.getString("entrer la date de clôture"));
 				inscript.createEquipe(nom);
 			}
 		};
